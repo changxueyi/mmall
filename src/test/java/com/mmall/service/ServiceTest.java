@@ -6,6 +6,7 @@ import com.mmall.pojo.User;
 import com.mmall.test.TestBase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -24,8 +25,9 @@ public class ServiceTest extends TestBase {
     private UserMapper userMapper;
     @Autowired
     DataSource dataSource;
+
     @Test
-    public void ContextLoads() throws SQLException{
+    public void ContextLoads() throws SQLException {
         System.out.println(dataSource.getClass());
         System.out.println(dataSource.getConnection());
     }
@@ -41,9 +43,9 @@ public class ServiceTest extends TestBase {
         User user = userMapper.selectLogin("xiaodan", "123456");
         System.out.println(user);
     }
-    
+
     @Test
-    public void test03(){
+    public void test03() {
         List user1 = userMapper.selectAll();
         System.out.println(user1);
     }
@@ -54,4 +56,24 @@ public class ServiceTest extends TestBase {
         System.out.println(user);
 
     }*/
+
+    @Test
+    public void test04() {
+       User user  =   userMapper.login("xiaodan","123456");
+        System.out.println(user);
+    }
+    @Test
+    public void test05(){
+       int data  =  userMapper.checkUsername("xiaodan");
+       if (data==0){
+           System.out.println("changxueyi");
+       }else {
+           System.out.println(data);
+       }
+    }
+    @Test
+    public void test06(){
+        User user = userMapper.login("xiaodan","123456");
+        System.out.println(user);
+    }
 }

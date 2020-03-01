@@ -26,4 +26,8 @@ public interface UserMapper {
 
     List<User> selectAll();
 
+   /* User login(User user);*/
+    User login(@Param("username")String username,@Param("password")String password);
+
+
 }

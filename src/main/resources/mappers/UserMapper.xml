@@ -152,7 +152,9 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
     <select id="checkUsername" parameterType="string" resultType="int">
-      select count (1) from mmall_user
+      select
+      <include refid="Base_Column_List" />
+       from mmall_user
       where username = #{username}
     </select>
 
@@ -166,4 +168,16 @@
     <select id="selectAll" resultType="com.mmall.pojo.User">
         select * from mmall_user
     </select>
+   <!-- <select id="login" resultMap="BaseResultMap" parameterType="com.mmall.pojo.User">
+        select * from mmall_user where username=#{username} and password=#{password} limit 1
+    </select>-->
+    <select id="login" resultType="com.mmall.pojo.User" parameterType="string">
+        select
+        <include refid="Base_Column_List" />
+        from mmall_user
+        where username = #{username}
+        and password = #{password}
+    </select>
+
+
 </mapper>
